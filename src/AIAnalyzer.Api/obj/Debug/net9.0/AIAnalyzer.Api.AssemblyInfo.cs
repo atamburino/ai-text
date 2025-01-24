@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AIAnalyzer.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+046ca1bddf5f341f0408990a428c5156c934a7d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46c2db7998de7d375c82979ee0f89525dcb5967b")]
 [assembly: System.Reflection.AssemblyProductAttribute("AIAnalyzer.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AIAnalyzer.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
