@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIAnalyzer.Api", "AIAnalyzer.Api\AIAnalyzer.Api.csproj", "{C411578F-6B91-4780-9571-D6DDC82EB479}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIAnalyzer.Api", "src/AIAnalyzer.Api\AIAnalyzer.Api.csproj", "{C411578F-6B91-4780-9571-D6DDC82EB479}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{95542084-90AB-47D3-A3F0-CC419100A3D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIAnalyzer.Api", "src\AIAnalyzer.Api\AIAnalyzer.Api.csproj", "{FBC2AEFF-D36C-42D5-A4BC-922011FB38B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +22,12 @@ Global
 		{C411578F-6B91-4780-9571-D6DDC82EB479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C411578F-6B91-4780-9571-D6DDC82EB479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C411578F-6B91-4780-9571-D6DDC82EB479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC2AEFF-D36C-42D5-A4BC-922011FB38B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC2AEFF-D36C-42D5-A4BC-922011FB38B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC2AEFF-D36C-42D5-A4BC-922011FB38B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC2AEFF-D36C-42D5-A4BC-922011FB38B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FBC2AEFF-D36C-42D5-A4BC-922011FB38B6} = {95542084-90AB-47D3-A3F0-CC419100A3D6}
 	EndGlobalSection
 EndGlobal
