@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ut4OjjGLESU=",
+  "success": true,
+  "projectFilePath": "/Users/andy/dev/ai-text/src/AIAnalyzer.Api/AIAnalyzer.Api.csproj",
+  "expectedPackageFiles": [
+    "/Users/andy/.nuget/packages/microsoft.aspnetcore.openapi/9.0.0/microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
+    "/Users/andy/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

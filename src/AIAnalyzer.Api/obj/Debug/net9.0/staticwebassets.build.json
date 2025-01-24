@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "iGAFeLgBbUxBmhJOcBvqbtWxbyTlVdICbOdf/l1DrIA=",
+  "Source": "AIAnalyzer.Api",
+  "BasePath": "_content/AIAnalyzer.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

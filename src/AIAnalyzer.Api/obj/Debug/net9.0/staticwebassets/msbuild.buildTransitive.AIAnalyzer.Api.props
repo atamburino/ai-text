@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/AIAnalyzer.Api.props" />
+</Project>
