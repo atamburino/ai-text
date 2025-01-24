@@ -23,7 +23,7 @@ A lightweight AI-powered tool for text summarization and sentiment analysis, bui
 - Deployment: Docker, Azure
 
 ## Roadmap
-- [ ] Project Initialization
+- [x] Project Initialization
 - [ ] AI Model Integration
 - [ ] User Interaction
 - [ ] Deployment
