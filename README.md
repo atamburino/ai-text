@@ -1,9 +1,3 @@
- Repository Setup
-
-    Repo Name: ai-text
-    
-    Description: "A lightweight AI-powered text analysis tool built with C# and ML.NET."
-    Structure:
 ```
 ├── README.md
 ├── .gitignore
@@ -16,24 +10,29 @@
 └── docs/                         # Documentation
 ```
 
-2. Milestones
+# AI Text Analyzer
+A lightweight AI-powered tool for text summarization and sentiment analysis, built with C# and ML.NET.
 
-    Milestone 1: Project Initialization
-        Set up the repository structure.
-        Create the initial API project in ASP.NET Core.
-        Add a simple GET /api/status endpoint to verify the API is running.
+## Features
+- Summarize large blocks of text into concise summaries.
+- Analyze sentiment from user feedback or reviews.
 
-    Milestone 2: AI Model Integration
-        Decide on the AI task: summarization or sentiment analysis.
-        Integrate ML.NET and load a pre-trained model or train a custom model.
-        Create a POST /api/analyze endpoint to accept text input and return results.
+## Tech Stack
+- Backend: ASP.NET Core, ML.NET
+- Frontend: React (optional)
+- Deployment: Docker, Azure
 
-    Milestone 3: Frontend or User Interaction
-        Build a simple web UI to accept user input and display results.
-        Connect the frontend to the API.
+## Roadmap
+- [ ] Project Initialization
+- [ ] AI Model Integration
+- [ ] User Interaction
+- [ ] Deployment
 
-    Milestone 4: Deployment
-        Add Docker support.
-        Deploy the project to Azure or another hosting service.
-        Write deployment documentation.
+## How to Run Locally
+1. Clone the repository: `git clone https://github.com/your-username/ai-text.git`
+2. Navigate to the API project: `cd src/AIAnalyzer.Api`
+3. Run the API: `dotnet run`
+4. (Optional) Run the UI: `cd src/UI && npm start`
 
+## Contributing
+Feel free to fork the repo and open a pull request!
