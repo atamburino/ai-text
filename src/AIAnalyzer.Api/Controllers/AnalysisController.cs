@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using AIAnalyzer.Api.Services;
 
 namespace AIAnalyzer.Api.Controllers
 {
@@ -8,10 +9,12 @@ namespace AIAnalyzer.Api.Controllers
     public class AnalysisController : ControllerBase
     {
         private readonly ILogger<AnalysisController> _logger;
+        private readonly MLService _mlService;
 
-        public AnalysisController(ILogger<AnalysisController> logger)
+        public AnalysisController(ILogger<AnalysisController> logger, MLService mlService)
         {
             _logger = logger;
+            _mlService = mlService;
         }
 
         [HttpGet]
@@ -21,9 +24,10 @@ namespace AIAnalyzer.Api.Controllers
         }
 
         [HttpGet("analyze")]
-        public IActionResult Analyze(string text) {
-            // Mock analysis
-            return Ok(new { Text = text, Analysis = "This is a placeholder analysis." });
+        public async Task<IActionResult> Analyze(string text)
+        {
+            var analysis = await _mlService.AnalyzeText(text);
+            return Ok(new { Text = text, Analysis = analysis });
         }
     }
 

@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using AIAnalyzer.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "AIAnalyzer API", Version = "v1" });
 });
+
+// Register ML Service
+builder.Services.AddSingleton<MLService>();
 
 var app = builder.Build();
 
