@@ -1,81 +1,79 @@
-using Microsoft.ML;
-using Microsoft.ML.Data;
-using System.Net.Http;
-using System.IO;
-using System.Threading.Tasks;
+using System.Net.Http.Json;
+using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace AIAnalyzer.Api.Services
 {
-    public class MLService
+    public class MLService : IDisposable
     {
-        private readonly MLContext _mlContext;
-        private readonly string _modelPath;
         private readonly ILogger<MLService> _logger;
-        private bool _modelInitialized = false;
+        private readonly HttpClient _httpClient;
+        private readonly string _apiKey;
 
-        public MLService(ILogger<MLService> logger)
+        public MLService(ILogger<MLService> logger, IConfiguration configuration, HttpClient httpClient)
         {
-            _mlContext = new MLContext(seed: 1);
             _logger = logger;
-            _modelPath = Path.Combine(AppContext.BaseDirectory, "Models", "deepseek-model.onnx");
-        }
+            _httpClient = httpClient;
+            
+            _apiKey = Environment.GetEnvironmentVariable("DEEPSEEK_API_KEY");
+            var baseUrl = configuration["Deepseek:BaseUrl"];
+            
+            _logger.LogInformation($"Initializing MLService with API Key: {_apiKey?.Substring(0, 10)}... and Base URL: {baseUrl}");
 
-        public async Task InitializeAsync()
-        {
-            if (_modelInitialized)
-                return;
-
-            var modelDir = Path.GetDirectoryName(_modelPath);
-            if (!Directory.Exists(modelDir))
-                Directory.CreateDirectory(modelDir);
-
-            if (!File.Exists(_modelPath))
+            if (string.IsNullOrEmpty(_apiKey))
             {
-                _logger.LogInformation("Downloading model...");
-                await DownloadModelAsync();
+                throw new Exception("DEEPSEEK_API_KEY environment variable is not set");
             }
 
-            _modelInitialized = true;
-        }
+            if (string.IsNullOrEmpty(baseUrl))
+            {
+                throw new Exception("Deepseek base URL not found in configuration");
+            }
 
-        private async Task DownloadModelAsync()
-        {
-            // TODO: Replace with actual model download URL
-            const string modelUrl = "YOUR_MODEL_URL";
-            
-            using var client = new HttpClient();
-            using var response = await client.GetStreamAsync(modelUrl);
-            using var fileStream = File.Create(_modelPath);
-            await response.CopyToAsync(fileStream);
+            _httpClient.BaseAddress = new Uri(baseUrl);
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
         }
 
         public async Task<string> AnalyzeText(string text)
         {
-            await InitializeAsync();
-
             try
             {
-                // TODO: Implement actual model inference
-                // This is a placeholder until we implement the full inference pipeline
-                return $"Analyzed using local Deepseek model: {text}";
+                _logger.LogInformation($"Analyzing text: {text}");
+
+                var request = new
+                {
+                    model = "deepseek-coder-6.7b-instruct",
+                    messages = new[]
+                    {
+                        new { role = "system", content = "You are an AI text analysis assistant. Analyze the following text and provide insights about its content, tone, and key points." },
+                        new { role = "user", content = text }
+                    },
+                    temperature = 0.7,
+                    max_tokens = 1000
+                };
+
+                _logger.LogInformation($"Sending request to: {_httpClient.BaseAddress}/chat/completions");
+                var response = await _httpClient.PostAsJsonAsync("/chat/completions", request);
+                
+                _logger.LogInformation($"Response status code: {response.StatusCode}");
+                var responseContent = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation($"Response content: {responseContent}");
+                
+                response.EnsureSuccessStatusCode();
+
+                var result = await response.Content.ReadFromJsonAsync<JsonElement>();
+                return result.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString() ?? "No response generated";
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error analyzing text");
+                _logger.LogError(ex, "Error analyzing text with Deepseek");
                 throw;
             }
         }
-    }
 
-    public class TextData
-    {
-        [LoadColumn(0)]
-        public string Text { get; set; }
-    }
-
-    public class TextPrediction
-    {
-        [ColumnName("PredictedLabel")]
-        public string Category { get; set; }
+        public void Dispose()
+        {
+            // No cleanup needed
+        }
     }
 }

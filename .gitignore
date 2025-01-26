@@ -1,0 +1,18 @@
+src/AIAnalyzer.Api/Models/*.onnx
+.env
+
+# .NET build output
+bin/
+obj/
+
+# Environment files containing secrets
+.env
+appsettings.*.json
+!appsettings.json
+
+# IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.cache

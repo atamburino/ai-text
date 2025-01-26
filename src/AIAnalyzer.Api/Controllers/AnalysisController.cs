@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using AIAnalyzer.Api.Services;
 
 namespace AIAnalyzer.Api.Controllers
@@ -23,15 +22,21 @@ namespace AIAnalyzer.Api.Controllers
             return Ok("Analysis endpoint working!");
         }
 
-        [HttpGet("analyze")]
-        public async Task<IActionResult> Analyze(string text)
+        [HttpPost("analyze")]
+        public async Task<IActionResult> Analyze([FromBody] AnalysisRequest request)
         {
-            var analysis = await _mlService.AnalyzeText(text);
-            return Ok(new { Text = text, Analysis = analysis });
+            if (string.IsNullOrEmpty(request?.Text))
+            {
+                return BadRequest("Text to analyze is required");
+            }
+
+            var analysis = await _mlService.AnalyzeText(request.Text);
+            return Ok(new { Text = request.Text, Analysis = analysis });
         }
     }
 
-    public class AnalysisRequest {
+    public class AnalysisRequest
+    {
         public string Text { get; set; }
     }
 }

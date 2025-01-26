@@ -28,11 +28,30 @@ A lightweight AI-powered tool for text summarization and sentiment analysis, bui
 - [ ] User Interaction
 - [ ] Deployment
 
+## Configuration
+
+### API Keys
+For security reasons, API keys are not stored in the repository. To set up your development environment:
+
+1. Create a `.env` file in the root directory
+2. Add your API keys to this file:
+```
+DEEPSEEK_API_KEY=your_api_key_here
+```
+
+The application will automatically load the environment variables from the `.env` file.
+
+**IMPORTANT: Never commit API keys to version control!**
+- The `.env` file is ignored by git
+- For production, use environment variables or a secure key management service
+- Rotate your API keys if they are ever exposed
+
 ## How to Run Locally
 1. Clone the repository: `git clone https://github.com/your-username/ai-text.git`
 2. Navigate to the API project: `cd src/AIAnalyzer.Api`
-3. Run the API: `dotnet run`
-4. (Optional) Run the UI: `cd src/UI && npm start`
+3. Create `.env` file with your API keys
+4. Run the API: `dotnet run`
+5. (Optional) Run the UI: `cd src/UI && npm start`
 
 ## Contributing
 Feel free to fork the repo and open a pull request!
